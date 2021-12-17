@@ -1,0 +1,30 @@
+{
+    "name": "cloudbear/freescout-postal",
+    "type": "laravel-module",
+    "description": "",
+    "authors": [
+        {
+            "name": "Wouter van Os",
+            "email": "wouter0100@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.3",
+        "zbateson/mail-mime-parser": "1.3.1"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\Postal\\Providers\\PostalServiceProvider"
+            ],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Postal\\": ""
+        }
+    }
+}
