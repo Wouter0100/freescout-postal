@@ -24,7 +24,6 @@ class PostalServiceProvider extends ServiceProvider
     {
         $this->registerConfig();
         $this->registerViews();
-        $this->registerFactories();
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
         $this->hooks();
         $this->macros();
@@ -88,7 +87,7 @@ class PostalServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->registerTranslations();
+
     }
 
     /**
@@ -124,27 +123,6 @@ class PostalServiceProvider extends ServiceProvider
         $this->loadViewsFrom(array_merge(array_map(function ($path) {
             return $path . '/modules/postal';
         }, \Config::get('view.paths')), [$sourcePath]), 'postal');
-    }
-
-    /**
-     * Register translations.
-     *
-     * @return void
-     */
-    public function registerTranslations()
-    {
-        $this->loadJsonTranslationsFrom(__DIR__ .'/../Resources/lang');
-    }
-
-    /**
-     * Register an additional directory of factories.
-     * @source https://github.com/sebastiaanluca/laravel-resource-flow/blob/develop/src/Modules/ModuleServiceProvider.php#L66
-     */
-    public function registerFactories()
-    {
-        if (! app()->environment('production')) {
-            app(Factory::class)->load(__DIR__ . '/../Database/factories');
-        }
     }
 
     /**
