@@ -75,8 +75,8 @@ class PostalServiceProvider extends ServiceProvider
             return $response;
         }, 20, 2);
 
-        \Eventy::addFilter('mailbox.connection_incoming.settings', function($template, $id) use ($incomingHttp)  {
-            return $id !== $incomingHttp ? $template : 'postal::mailboxes.partials.connection_incoming.postal-http';
+        \Eventy::addAction('mailbox.connection_incoming.after_default_settings', function($mailbox) use ($incomingHttp)  {
+            echo view('postal::mailboxes.partials.connection_incoming.postal-http', compact('mailbox', 'incomingHttp'))->render();
         }, 20, 2);
     }
 
