@@ -83,36 +83,14 @@ class Message
         return $this->message->getAttachmentCount() !== 0;
     }
 
-    /**
-     * Get HTML content and convert to UTF-8 if necessary.
-     */
     public function getHTMLBody()
     {
-        $html = $this->message->getHtmlContent();
-        $charset = $this->message->getHtmlCharset();
-
-        // If a charset is defined and it's not already UTF-8, convert it.
-        if ($html && $charset && strcasecmp($charset, 'UTF-8') != 0) {
-            $html = mb_convert_encoding($html, 'UTF-8', $charset);
-        }
-
-        return $html;
+        return $this->message->getHtmlContent();
     }
 
-    /**
-     * Get text content and convert to UTF-8 if necessary.
-     */
     public function getTextBody()
     {
-        $text = $this->message->getTextContent();
-        $charset = $this->message->getTextCharset();
-
-        // If a charset is defined and it's not already UTF-8, convert it.
-        if ($text && $charset && strcasecmp($charset, 'UTF-8') != 0) {
-            $text = mb_convert_encoding($text, 'UTF-8', $charset);
-        }
-
-        return $text;
+        return $this->message->getTextContent();
     }
 
     public function getHeader()
@@ -131,19 +109,9 @@ class Message
         return $this->raw;
     }
 
-    /**
-     * Get subject and ensure it is valid UTF-8.
-     */
     public function getSubject()
     {
-        $subject = $this->message->getHeaderValue(HeaderConsts::SUBJECT);
-
-        // Ensure the final output is valid UTF-8, replacing invalid characters.
-        if ($subject && !mb_check_encoding($subject, 'UTF-8')) {
-            return mb_convert_encoding($subject, 'UTF-8', 'auto');
-        }
-
-        return $subject;
+        return $this->message->getHeaderValue(HeaderConsts::SUBJECT);
     }
 
     private function _getEmailHeader($name)
