@@ -16,6 +16,8 @@ class Message
 
     public function __construct($raw)
     {
+        $raw = preg_replace('/(charset\s*=\s*"?)(windows-1256)("?)/i', '$1utf-8$3', $raw);
+
         $this->message = (new MailMimeParser())->parse($this->raw = $raw);
     }
 
